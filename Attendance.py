@@ -21,20 +21,6 @@ x_cord = 75;
 y_cord = 20;
 checker = 0;
 
-#def clearId():
-    #txt.delete(0, 'end')
-
-#def clearName():
-   # txt2.delete(0, 'end')
-
-
-message = tk.Label(window, text="(Vivekanand Education Soceity's Institute of Technology)", bg="light blue", fg="red4",
-                   width=50, height=1, font=('Times New Roman', 15, 'bold'))
-message.place(x=380, y=90)
-logo = tk.PhotoImage(file="VESIT.png", )
-
-w1 = tk.Label(window, image=logo).place(x=120, y=20)
-
 message = tk.Label(window, text="ATTENDANCE MANAGEMENT PORTAL", bg="light blue", fg="blue4", width=30, height=1,
                    font=('Cambria', 35, 'bold'))
 message.place(x=265, y=20)
@@ -46,19 +32,12 @@ lbl.place(x=150 - x_cord, y=200 - y_cord)
 txt = tk.Entry(window, width=30, bg="white", fg="blue", font=('Times New Roman', 15, ' bold '))
 txt.place(x=160 - x_cord, y=280 - y_cord)
 
-#clearButton1 = tk.Button(window, text="Clear", command=clearName, fg="black", bg="light blue", width=3, height activebackground="Red", font=('times', 15, ' bold '))
-#clearButton1.place(x=810, y=260)
-
-
 lbl2 = tk.Label(window, text="Enter Your Name", width=20, fg="black", bg="light blue", height=3,
                 font=('Times New Roman', 20, ' bold '))
 lbl2.place(x=570 - x_cord, y=200 - y_cord)
 
 txt2 = tk.Entry(window, width=30, bg="white", fg="blue", font=('Times New Roman', 15, ' bold '))
 txt2.place(x=580 - x_cord, y=280 - y_cord)
-
-#clearButton2 = tk.Button(window, command=clearId, fg="black", bg="light blue", width=25,height=3,
-#activebackground="Red", font=('times', 15, ' bold '))
 
 lbl3 = tk.Label(window, text="Notification", width=20, fg="black", bg="light blue", height=3,
                 font=('Times New Roman', 20, 'bold  '))
@@ -101,7 +80,7 @@ def TakeImages():
     Id = (txt.get())
     name = (txt2.get())
     if (isNumber(Id) and name.isalpha()):
-        cam = cv2.VideoCapture("http://192.168.0.104:8080/video")
+        cam = cv2.VideoCapture("0") #ipcam url (if web cam not available) else "0"
         harcascadePath = "haarcascade_frontalface_default.xml"
         detector = cv2.CascadeClassifier(harcascadePath)
         sampleNum = 0
@@ -164,7 +143,7 @@ def TrackImages():
     harcascadePath = "haarcascade_frontalface_default.xml"
     faceCascade = cv2.CascadeClassifier(harcascadePath);
     df = pd.read_csv("StudentDetails\StudentDetails.csv")
-    cam = cv2.VideoCapture('http://192.168.0.104:8080/video')
+    cam = cv2.VideoCapture('0') #ipcam url (if webcam nbot available) else '0'
     font = cv2.FONT_HERSHEY_SIMPLEX
     col_names = ['Id', 'Name', 'Date', 'Time']
     attendance = pd.DataFrame(columns=col_names)
@@ -234,7 +213,6 @@ quitWindow.place(x=600, y=720 - y_cord)
 copyWrite = tk.Text(window, background=window.cget("background"), borderwidth=0, font=('times', 10, 'italic bold '))
 copyWrite.tag_configure("superscript", offset=10)
 copyWrite.insert("insert", "Developed by Sadiq Shaikh" + "\u00A9")
-copyWrite.insert("insert", "\n Documented by Aadil Shaikh" + "\u00A9")
 copyWrite.configure(state="disabled", fg="black")
 copyWrite.pack(side="left")
 copyWrite.place(x=1100, y=720)
